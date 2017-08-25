@@ -5,11 +5,12 @@ import com.mam.recipepuppy.domain.interactors.common.InteractorExecutor;
 import com.mam.recipepuppy.domain.interactors.recipes.GetRecipesInteractor;
 import com.mam.recipepuppy.domain.model.Recipe;
 import com.mam.recipepuppy.presentation.common.AbstractPresenter;
+import com.mam.recipepuppy.presentation.common.BasePresenter;
 import com.mam.recipepuppy.presentation.common.BaseView;
 
 import java.util.List;
 
-public class RecipesPresenter extends AbstractPresenter implements GetRecipesInteractor.Callback {
+public class RecipesPresenter extends AbstractPresenter implements BasePresenter, GetRecipesInteractor.Callback {
 
     private InteractorExecutor executor;
     private RecipesView recipesView;

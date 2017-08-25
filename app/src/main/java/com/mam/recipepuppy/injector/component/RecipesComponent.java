@@ -14,6 +14,5 @@ import dagger.Subcomponent;
 )
 public interface RecipesComponent {
     void inject(RecipesActivity heroesActivity);
-
     RecipesPresenter getRecipesPresenter();
 }

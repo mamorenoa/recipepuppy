@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Recipe Puppy</string>
+    <string name="common_connection_error_dialog">Connectivity Error</string>
+    <string name="common_default_error_dialog">Default error</string>
+    <string name="common_continue_dialog">Ok</string>
+    <string name="common_info_dialog">Info</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_reference">Web reference</string>
+    <string name="recipes_empty">Looks like you don\'t have recipes</string>
+</resources>

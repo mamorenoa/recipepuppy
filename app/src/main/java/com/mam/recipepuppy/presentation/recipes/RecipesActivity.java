@@ -1,6 +1,8 @@
 package com.mam.recipepuppy.presentation.recipes;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -13,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mam.recipepuppy.R;
-import com.mam.recipepuppy.domain.model.Recipe;
+import com.mam.recipepuppy.presentation.model.Recipe;
+import com.mam.recipepuppy.presentation.model.RecipesViewModel;
 import com.mam.recipepuppy.injector.module.RecipesModule;
 import com.mam.recipepuppy.presentation.common.BaseActivity;
+import com.mam.recipepuppy.presentation.common.BaseView;
 import com.mam.recipepuppy.presentation.navigator.Navigator;
 import com.mam.recipepuppy.presentation.widget.dialog.DialogAbstract;
 import com.mam.recipepuppy.presentation.widget.spinner.SpinnerLoading;
@@ -26,42 +30,37 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
-public class RecipesActivity extends BaseActivity implements RecipesView {
+public class RecipesActivity extends BaseActivity implements BaseView {
 
     @Inject
     Navigator navigator;
-    @Inject
-    RecipesPresenter recipesPresenter;
     @Inject
     SpinnerLoading spinnerLoading;
     @Inject
     DialogAbstract dialog;
     @Inject
     ImageLoader imageLoader;
+    @Inject
+    RecipesViewModel recipesViewModel;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.recyclerRecipes)
+    @BindView(R.id.recyclerRecipes)
     RecyclerView recyclerRecipes;
-    @Bind(R.id.textRecipesListEmpty)
+    @BindView(R.id.textRecipesListEmpty)
     TextView textViewRecipesListEmpty;
 
     private RecipesAdapter recipesAdapter;
+    private LinearLayoutManager layoutManager;
     private SearchView viewSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        recipesPresenter.onViewAttached(this);
         initToolBar();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        recipesPresenter.onViewDetached();
+        observeViewModel(recipesViewModel, "");
     }
 
     @Override
@@ -74,12 +73,11 @@ public class RecipesActivity extends BaseActivity implements RecipesView {
         return R.layout.activity_recipes;
     }
 
-    @Override
     public void showRecipes(List<Recipe> recipes) {
         textViewRecipesListEmpty.setVisibility(View.GONE);
         recyclerRecipes.setVisibility(View.VISIBLE);
         recyclerRecipes.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerRecipes.setLayoutManager(layoutManager);
         recipesAdapter = new RecipesAdapter(recipes, imageLoader);
         recipesAdapter.setClickListener(new RecipesAdapter.OnItemClickListener() {
@@ -92,7 +90,6 @@ public class RecipesActivity extends BaseActivity implements RecipesView {
         AnimationsUtils.animateRecycler(recyclerRecipes);
     }
 
-    @Override
     public void showRecipeListEmpty() {
         textViewRecipesListEmpty.setVisibility(View.VISIBLE);
         recyclerRecipes.setVisibility(View.GONE);
@@ -115,7 +112,7 @@ public class RecipesActivity extends BaseActivity implements RecipesView {
                     recipesAdapter.clear();
                     showRecipeListEmpty();
                 } else {
-                    recipesPresenter.getRecipes(newText);
+                    observeViewModel(recipesViewModel, newText);
                 }
                 return true;
             }
@@ -134,14 +131,17 @@ public class RecipesActivity extends BaseActivity implements RecipesView {
         spinnerLoading.dismiss();
     }
 
-    @Override
-    public void showConnectionError() {
-        dialog.showSimple(this, getString(R.string.common_info_dialog), getString(R.string.common_connection_error_dialog), getString(R.string.common_continue_dialog));
-    }
-
-    @Override
-    public void showDefaultError() {
-        dialog.showSimple(this, getString(R.string.common_info_dialog), getString(R.string.common_default_error_dialog), getString(R.string.common_continue_dialog));
+    private void observeViewModel(RecipesViewModel viewModel, String query) {
+        viewModel.getRecipesObservable(query).observe(this, new Observer<List<Recipe>>() {
+            @Override
+            public void onChanged(@Nullable List<Recipe> recipes) {
+                if ((recipes != null) && (!recipes.isEmpty())) {
+                    showRecipes(recipes);
+                } else {
+                    showRecipeListEmpty();
+                }
+            }
+        });
     }
 
     private void initToolBar() {

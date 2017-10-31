@@ -1,6 +1,5 @@
 package com.mam.recipepuppy.injector.module;
 
-
 import com.mam.recipepuppy.presentation.common.BaseActivity;
 import com.mam.recipepuppy.presentation.widget.dialog.DialogAbstract;
 import com.mam.recipepuppy.presentation.widget.dialog.DialogAbstractImpl;

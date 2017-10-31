@@ -1,7 +1,7 @@
 package com.mam.recipepuppy.data.mappers;
 
-import com.mam.recipepuppy.data.api.response.ServerRecipe;
-import com.mam.recipepuppy.domain.model.Recipe;
+import com.mam.recipepuppy.data.model.ServerRecipe;
+import com.mam.recipepuppy.presentation.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,5 +24,5 @@ public class RecipeMapper {
         recipe.setThumbnail(serverRecipe.getThumbnail());
         return recipe;
     }
-
 }
+

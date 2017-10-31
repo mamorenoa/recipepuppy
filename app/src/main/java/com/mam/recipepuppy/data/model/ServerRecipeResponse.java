@@ -1,4 +1,5 @@
-package com.mam.recipepuppy.data.api.response;
+package com.mam.recipepuppy.data.model;
+
 
 import com.google.gson.annotations.SerializedName;
 

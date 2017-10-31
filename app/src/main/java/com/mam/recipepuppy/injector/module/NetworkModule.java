@@ -4,7 +4,7 @@ import android.app.Application;
 
 
 import com.mam.recipepuppy.R;
-import com.mam.recipepuppy.data.api.services.ApiService;
+import com.mam.recipepuppy.data.api.ApiService;
 
 import java.util.concurrent.TimeUnit;
 

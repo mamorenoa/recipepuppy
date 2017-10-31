@@ -2,13 +2,13 @@ package com.mam.recipepuppy.injector.component;
 
 import android.app.Application;
 
-import com.mam.recipepuppy.data.api.services.ApiService;
-import com.mam.recipepuppy.domain.interactors.common.InteractorExecutor;
-import com.mam.recipepuppy.domain.interactors.common.UiThreadHandler;
+import com.mam.recipepuppy.data.api.ApiService;
+import com.mam.recipepuppy.common.InteractorExecutor;
 import com.mam.recipepuppy.injector.module.AppModule;
 import com.mam.recipepuppy.injector.module.NetworkModule;
 import com.mam.recipepuppy.injector.module.RecipeDetailModule;
 import com.mam.recipepuppy.injector.module.RecipesModule;
+import com.mam.recipepuppy.injector.module.RepositoryModule;
 import com.mam.recipepuppy.presentation.navigator.Navigator;
 import com.mam.recipepuppy.utils.ImageLoader;
 
@@ -19,7 +19,8 @@ import dagger.Component;
 @Singleton
 @Component(modules = {
         AppModule.class,
-        NetworkModule.class}
+        NetworkModule.class,
+        RepositoryModule.class}
 )
 public interface AppComponent {
 
@@ -33,9 +34,7 @@ public interface AppComponent {
 
     Navigator getNavigator();
 
-    InteractorExecutor getInteractorExecutor();
-
-    UiThreadHandler getUIThreadHandler();
+    InteractorExecutor getExecutor();
 
     ApiService getApiService();
 

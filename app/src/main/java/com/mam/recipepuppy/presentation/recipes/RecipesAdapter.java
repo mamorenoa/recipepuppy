@@ -10,12 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mam.recipepuppy.R;
-import com.mam.recipepuppy.domain.model.Recipe;
+import com.mam.recipepuppy.presentation.model.Recipe;
 import com.mam.recipepuppy.utils.ImageLoader;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolderRecipe> {
@@ -77,15 +77,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     }
 
     class ViewHolderRecipe extends RecyclerView.ViewHolder {
-        @Bind(R.id.cardRecipe)
+        @BindView(R.id.cardRecipe)
         protected CardView cardRecipe;
-        @Bind(R.id.imageRecipe)
+        @BindView(R.id.imageRecipe)
         protected ImageView imageRecipe;
-        @Bind(R.id.textTitle)
+        @BindView(R.id.textTitle)
         protected TextView textTitle;
-        @Bind(R.id.textIngredients)
+        @BindView(R.id.textIngredients)
         protected TextView textIngredients;
-        @Bind(R.id.textHref)
+        @BindView(R.id.textHref)
         protected TextView textHref;
 
         ViewHolderRecipe(View itemView) {

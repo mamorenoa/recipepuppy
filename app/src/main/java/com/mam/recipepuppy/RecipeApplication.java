@@ -7,16 +7,10 @@ import com.mam.recipepuppy.injector.component.ComponentsHelper;
 public class RecipeApplication extends Application {
 
     private ComponentsHelper componentsHelper;
-    public static RecipeApplication mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
-    }
-
-    static public RecipeApplication getInstance() {
-        return mInstance;
     }
 
     public ComponentsHelper getComponentsHelper() {

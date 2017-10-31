@@ -2,10 +2,8 @@ package com.mam.recipepuppy.injector.module;
 
 import android.app.Application;
 
-import com.mam.recipepuppy.domain.interactors.common.InteractorExecutor;
-import com.mam.recipepuppy.domain.interactors.common.InteractorExecutorImpl;
-import com.mam.recipepuppy.domain.interactors.common.UiThreadHandler;
-import com.mam.recipepuppy.domain.interactors.common.UiThreadHandlerImpl;
+import com.mam.recipepuppy.common.InteractorExecutor;
+import com.mam.recipepuppy.common.InteractorExecutorImpl;
 import com.mam.recipepuppy.presentation.navigator.Navigator;
 import com.mam.recipepuppy.utils.ImageLoader;
 import com.mam.recipepuppy.utils.ImageLoaderImpl;
@@ -35,13 +33,6 @@ public class AppModule {
     public Navigator provideNavigator() {
         Navigator navigator = new Navigator();
         return navigator;
-    }
-
-    @Provides
-    @Singleton
-    public UiThreadHandler provideUIThreadHandler() {
-        UiThreadHandler uiThreadHandler = new UiThreadHandlerImpl();
-        return uiThreadHandler;
     }
 
     @Provides

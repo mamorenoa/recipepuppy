@@ -1,17 +1,17 @@
 package com.mam.recipepuppy.data;
 
-import com.google.gson.JsonSyntaxException;
-import com.mam.recipepuppy.data.api.response.ServerRecipeResponse;
-import com.mam.recipepuppy.data.api.services.ApiService;
-import com.mam.recipepuppy.data.exceptions.io.ConnectionException;
-import com.mam.recipepuppy.data.exceptions.recipes.GetRecipesException;
-import com.mam.recipepuppy.data.mappers.RecipeMapper;
-import com.mam.recipepuppy.domain.model.Recipe;
-import com.mam.recipepuppy.domain.repository.RecipesRepository;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 
-import java.io.IOException;
+import com.mam.recipepuppy.data.api.ApiService;
+import com.mam.recipepuppy.data.mappers.RecipeMapper;
+import com.mam.recipepuppy.data.model.ServerRecipeResponse;
+import com.mam.recipepuppy.presentation.model.Recipe;
+
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecipesRepositoryImpl extends BaseRepository implements RecipesRepository {
@@ -21,22 +21,19 @@ public class RecipesRepositoryImpl extends BaseRepository implements RecipesRepo
     }
 
     @Override
-    public List<Recipe> get(String query) throws GetRecipesException, ConnectionException {
-        List<Recipe> recipes;
-        ServerRecipeResponse serverRecipesResponse;
-        try {
-            Response<ServerRecipeResponse> serverResponse = apiService.getRecipes(query).execute();
-            if (serverResponse.isSuccessful()) {
-                serverRecipesResponse = serverResponse.body();
-                recipes = RecipeMapper.serverToDomain(serverRecipesResponse.getResults());
-            } else {
-                throw new GetRecipesException();
+    public LiveData<List<Recipe>> get(String query) {
+        final MutableLiveData<List<Recipe>> data = new MutableLiveData<>();
+        apiService.getRecipes(query).enqueue(new Callback<ServerRecipeResponse>() {
+            @Override
+            public void onResponse(Call<ServerRecipeResponse> call, Response<ServerRecipeResponse> response) {
+                ServerRecipeResponse serverResponse = response.body();
+                data.setValue(RecipeMapper.serverToDomain(serverResponse.getResults()));
             }
-        } catch (IOException ioException) {
-            throw new ConnectionException();
-        } catch (JsonSyntaxException jsonException) {
-            throw new ConnectionException();
-        }
-        return recipes;
+
+            @Override
+            public void onFailure(Call<ServerRecipeResponse> call, Throwable t) {
+            }
+        });
+        return data;
     }
 }

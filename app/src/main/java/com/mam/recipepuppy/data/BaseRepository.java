@@ -1,6 +1,6 @@
 package com.mam.recipepuppy.data;
 
-import com.mam.recipepuppy.data.api.services.ApiService;
+import com.mam.recipepuppy.data.api.ApiService;
 
 public abstract class BaseRepository {
 

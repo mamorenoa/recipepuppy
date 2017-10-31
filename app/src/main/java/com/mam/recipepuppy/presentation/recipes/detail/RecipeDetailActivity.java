@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mam.recipepuppy.R;
-import com.mam.recipepuppy.domain.model.Recipe;
+import com.mam.recipepuppy.presentation.model.Recipe;
 import com.mam.recipepuppy.injector.module.RecipeDetailModule;
 import com.mam.recipepuppy.presentation.common.BaseActivity;
 import com.mam.recipepuppy.utils.ImageLoader;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class RecipeDetailActivity extends BaseActivity {
 
@@ -25,15 +25,15 @@ public class RecipeDetailActivity extends BaseActivity {
     @Inject
     ImageLoader imageLoader;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.textTitle)
+    @BindView(R.id.textTitle)
     TextView textName;
-    @Bind(R.id.textIngredientsValue)
+    @BindView(R.id.textIngredientsValue)
     TextView textIngredients;
-    @Bind(R.id.textReferenceValue)
+    @BindView(R.id.textReferenceValue)
     TextView textReference;
-    @Bind(R.id.imageRecipe)
+    @BindView(R.id.imageRecipe)
     ImageView imageRecipe;
 
     public static Intent buildIntent(Context context, Recipe recipe) {

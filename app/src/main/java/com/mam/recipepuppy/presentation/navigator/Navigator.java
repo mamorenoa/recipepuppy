@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 
-import com.mam.recipepuppy.domain.model.Recipe;
+import com.mam.recipepuppy.presentation.model.Recipe;
 import com.mam.recipepuppy.presentation.recipes.RecipesActivity;
 import com.mam.recipepuppy.presentation.recipes.detail.RecipeDetailActivity;
 

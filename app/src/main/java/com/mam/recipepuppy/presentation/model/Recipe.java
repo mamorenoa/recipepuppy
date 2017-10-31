@@ -1,4 +1,4 @@
-package com.mam.recipepuppy.domain.model;
+package com.mam.recipepuppy.presentation.model;
 
 import java.io.Serializable;
 

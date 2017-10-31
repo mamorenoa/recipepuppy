@@ -1,6 +1,7 @@
-package com.mam.recipepuppy.data.api.services;
+package com.mam.recipepuppy.data.api;
 
-import com.mam.recipepuppy.data.api.response.ServerRecipeResponse;
+
+import com.mam.recipepuppy.data.model.ServerRecipeResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

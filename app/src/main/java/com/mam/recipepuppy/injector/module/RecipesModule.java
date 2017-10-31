@@ -1,13 +1,10 @@
 package com.mam.recipepuppy.injector.module;
 
-import com.mam.recipepuppy.data.RecipesRepositoryImpl;
-import com.mam.recipepuppy.data.api.services.ApiService;
-import com.mam.recipepuppy.domain.interactors.common.InteractorExecutor;
-import com.mam.recipepuppy.domain.interactors.common.UiThreadHandler;
-import com.mam.recipepuppy.domain.interactors.recipes.GetRecipesInteractor;
-import com.mam.recipepuppy.domain.repository.RecipesRepository;
-import com.mam.recipepuppy.presentation.common.BaseActivity;
-import com.mam.recipepuppy.presentation.recipes.RecipesPresenter;
+import android.arch.lifecycle.ViewModelProviders;
+
+import com.mam.recipepuppy.data.RecipesRepository;
+import com.mam.recipepuppy.presentation.model.RecipesViewModel;
+import com.mam.recipepuppy.presentation.recipes.RecipesActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,23 +12,17 @@ import dagger.Provides;
 @Module
 public class RecipesModule extends ActivityModule {
 
-    public RecipesModule(BaseActivity baseActivity) {
+    private RecipesActivity activity;
+
+    public RecipesModule(RecipesActivity baseActivity) {
         super(baseActivity);
+        this.activity = baseActivity;
     }
 
     @Provides
-    public RecipesPresenter provideRecipesPresenter(InteractorExecutor executor, GetRecipesInteractor getRecipesInteractor) {
-        return new RecipesPresenter(executor, getRecipesInteractor);
-    }
-
-    @Provides
-    public GetRecipesInteractor providesGetRecipesInteractor(RecipesRepository recipesRepository, UiThreadHandler uiThreadHandler) {
-        return new GetRecipesInteractor(recipesRepository, uiThreadHandler);
-    }
-
-    @Provides
-    public RecipesRepository providesRecipesRepository(ApiService apiRecipes) {
-        RecipesRepository recipesRepository = new RecipesRepositoryImpl(apiRecipes);
-        return recipesRepository;
+    public RecipesViewModel provideRecipesViewModel(RecipesRepository recipesRepository) {
+        RecipesViewModel recipesViewModel = ViewModelProviders.of(this.activity).get(RecipesViewModel.class);
+        recipesViewModel.setRecipesRepository(recipesRepository);
+        return recipesViewModel;
     }
 }

@@ -1,6 +1,6 @@
 package com.mam.recipepuppy.injector.component;
 
-import com.mam.recipepuppy.presentation.model.RecipesViewModel;
+import com.mam.recipepuppy.presentation.recipes.RecipesViewModel;
 import com.mam.recipepuppy.injector.module.RecipesModule;
 import com.mam.recipepuppy.presentation.recipes.RecipesActivity;
 

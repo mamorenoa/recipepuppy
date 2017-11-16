@@ -1,9 +1,10 @@
-package com.mam.recipepuppy.presentation.model;
+package com.mam.recipepuppy.presentation.recipes;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.mam.recipepuppy.data.RecipesRepository;
+import com.mam.recipepuppy.presentation.model.Recipe;
 
 import java.util.List;
 

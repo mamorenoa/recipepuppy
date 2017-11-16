@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.mam.recipepuppy.R;
 import com.mam.recipepuppy.presentation.model.Recipe;
-import com.mam.recipepuppy.presentation.model.RecipesViewModel;
 import com.mam.recipepuppy.injector.module.RecipesModule;
 import com.mam.recipepuppy.presentation.common.BaseActivity;
 import com.mam.recipepuppy.presentation.common.BaseView;

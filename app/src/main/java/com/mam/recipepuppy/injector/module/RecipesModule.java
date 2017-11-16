@@ -3,7 +3,7 @@ package com.mam.recipepuppy.injector.module;
 import android.arch.lifecycle.ViewModelProviders;
 
 import com.mam.recipepuppy.data.RecipesRepository;
-import com.mam.recipepuppy.presentation.model.RecipesViewModel;
+import com.mam.recipepuppy.presentation.recipes.RecipesViewModel;
 import com.mam.recipepuppy.presentation.recipes.RecipesActivity;
 
 import dagger.Module;

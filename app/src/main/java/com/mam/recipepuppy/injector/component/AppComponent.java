@@ -3,7 +3,6 @@ package com.mam.recipepuppy.injector.component;
 import android.app.Application;
 
 import com.mam.recipepuppy.data.api.ApiService;
-import com.mam.recipepuppy.common.InteractorExecutor;
 import com.mam.recipepuppy.injector.module.AppModule;
 import com.mam.recipepuppy.injector.module.NetworkModule;
 import com.mam.recipepuppy.injector.module.RecipeDetailModule;
@@ -33,8 +32,6 @@ public interface AppComponent {
     Application getApplication();
 
     Navigator getNavigator();
-
-    InteractorExecutor getExecutor();
 
     ApiService getApiService();
 

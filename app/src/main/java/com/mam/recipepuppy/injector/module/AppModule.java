@@ -2,8 +2,6 @@ package com.mam.recipepuppy.injector.module;
 
 import android.app.Application;
 
-import com.mam.recipepuppy.common.InteractorExecutor;
-import com.mam.recipepuppy.common.InteractorExecutorImpl;
 import com.mam.recipepuppy.presentation.navigator.Navigator;
 import com.mam.recipepuppy.utils.ImageLoader;
 import com.mam.recipepuppy.utils.ImageLoaderImpl;
@@ -33,13 +31,6 @@ public class AppModule {
     public Navigator provideNavigator() {
         Navigator navigator = new Navigator();
         return navigator;
-    }
-
-    @Provides
-    @Singleton
-    public InteractorExecutor provideInteractorExecutor() {
-        InteractorExecutor interactorExecutor = new InteractorExecutorImpl();
-        return interactorExecutor;
     }
 
     @Provides
